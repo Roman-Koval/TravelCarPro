@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>TravelCar Pro</title>
 
 <link rel="manifest" href="manifest.json">
@@ -14,28 +13,27 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
 <header>🚗 TravelCar</header>
 
-<!-- TOTAL -->
-<div class="glass big-card">
-  <div class="label">Баланс</div>
-  <div id="total" class="total">€0</div>
+<div class="glass big">
+  <div>Баланс</div>
+  <div id="total">€0</div>
 </div>
 
-<!-- INPUT -->
-<div class="glass card">
+<div class="glass form">
   <input id="amount" placeholder="Сумма">
   
   <select id="currency">
-    <option>EUR</option><option>TRY</option><option>USD</option>
-    <option>GBP</option><option>CHF</option>
+    <option>EUR</option>
+    <option>TRY</option>
+    <option>USD</option>
+    <option>GBP</option>
+    <option>CHF</option>
   </select>
 
   <select id="category">
@@ -48,13 +46,12 @@
   <input id="comment" placeholder="Комментарий">
 </div>
 
-<!-- LIST -->
-<div id="list" class="list"></div>
+<canvas id="chart"></canvas>
 
-<!-- MAP -->
+<div id="list"></div>
+
 <div id="map"></div>
 
-<!-- NAVBAR -->
 <div class="nav">
   <button onclick="voice()">🎤</button>
   <button onclick="save()">➕</button>
