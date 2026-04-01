@@ -1,6 +1,6 @@
 body{
  margin:0;
- font-family:-apple-system,BlinkMacSystemFont;
+ font-family:-apple-system;
  background:#0f172a;
  color:#fff;
 }
@@ -8,37 +8,33 @@ body{
 header{
  padding:15px;
  font-size:20px;
- font-weight:600;
 }
 
 .glass{
- backdrop-filter:blur(20px);
  background:rgba(255,255,255,0.05);
- border-radius:20px;
+ backdrop-filter:blur(20px);
  margin:10px;
  padding:15px;
+ border-radius:20px;
+ box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-.big-card{
+.big{
  text-align:center;
+ font-size:24px;
 }
 
-.total{
- font-size:32px;
- font-weight:bold;
-}
-
-.card input, .card select{
+.form input, .form select{
  width:100%;
  margin-top:10px;
  padding:12px;
- border:none;
  border-radius:12px;
+ border:none;
  background:#1e293b;
  color:#fff;
 }
 
-.list{
+#list{
  padding:10px;
 }
 
@@ -63,7 +59,6 @@ header{
  left:10px;
  right:10px;
  display:flex;
- justify-content:space-around;
 }
 
 .nav button{
@@ -74,35 +69,4 @@ header{
  border-radius:16px;
  background:#22c55e;
  font-size:18px;
-}
-.item{
- transition:0.2s;
-}
-
-.item:active{
- transform:scale(0.97);
-}
-
-.nav button{
- box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
-
-.glass{
- box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-input:focus, select:focus{
- outline:none;
- box-shadow:0 0 0 2px #22c55e;
-}
-
-#map{
- height:280px;
- margin:10px;
- border-radius:20px;
- overflow:hidden;
-}
-
-.item small{
- opacity:0.6;
 }
