@@ -3,7 +3,7 @@ let expenses = JSON.parse(localStorage.getItem('expenses')||'[]');
 const map = L.map('map').setView([50,10],4);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-let markers=[], routeLine;
+let markers=[],routeLine,chart;
 
 // ===== SAVE =====
 async function save(){
@@ -23,7 +23,7 @@ async function save(){
   lat:pos.lat,
   lng:pos.lng,
   city,
-  date:new Date().toISOString()
+  date:Date.now()
  };
 
  expenses.push(item);
@@ -47,7 +47,7 @@ async function getCity(lat,lng){
  try{
   const res=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
   const d=await res.json();
-  return d.address.city||d.address.town||'Unknown';
+  return d.address.city||d.address.town||d.address.village||'Unknown';
  }catch{return 'Unknown'}
 }
 
@@ -80,10 +80,18 @@ function voice(){
   if(t.includes('бензин')) category.value='fuel';
   else if(t.includes('еда')) category.value='food';
   else if(t.includes('отель')) category.value='hotel';
-  else category.value='other';
  };
 
  r.start();
+}
+
+// ===== EXPORT =====
+function exportData(){
+ const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(expenses));
+ const a=document.createElement('a');
+ a.href=dataStr;
+ a.download="expenses.json";
+ a.click();
 }
 
 // ===== UI =====
@@ -93,12 +101,11 @@ function render(){
  markers=[];
  if(routeLine) map.removeLayer(routeLine);
 
- let total=0, points=[];
- let catSum={};
+ let total=0,points=[],cat={};
 
- expenses.forEach(e=>{
+ expenses.forEach((e,i)=>{
   total+=e.eur;
-  catSum[e.category]=(catSum[e.category]||0)+e.eur;
+  cat[e.category]=(cat[e.category]||0)+e.eur;
 
   const div=document.createElement('div');
   div.className='item';
@@ -106,6 +113,14 @@ function render(){
    <div>${e.city}<br><small>${e.comment||''}</small></div>
    <div>${e.amount} ${e.currency}<br><small>€${e.eur.toFixed(2)}</small></div>
   `;
+
+  // свайп удалить
+  div.ondblclick=()=>{
+    expenses.splice(i,1);
+    localStorage.setItem('expenses',JSON.stringify(expenses));
+    render();
+  };
+
   list.appendChild(div);
 
   const m=L.marker([e.lat,e.lng]).addTo(map);
@@ -117,17 +132,13 @@ function render(){
 
  totalEl.innerText='€'+total.toFixed(2);
 
- drawChart(catSum);
+ drawChart(cat);
 }
 
 // ===== CHART =====
-let chart;
 function drawChart(data){
- const ctx=document.getElementById('chart');
-
  if(chart) chart.destroy();
-
- chart=new Chart(ctx,{
+ chart=new Chart(chartEl,{
   type:'doughnut',
   data:{
    labels:Object.keys(data),
@@ -143,5 +154,6 @@ function clear(){
 }
 
 const totalEl=document.getElementById('total');
+const chartEl=document.getElementById('chart');
 
 render();
