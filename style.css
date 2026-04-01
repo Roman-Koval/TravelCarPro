@@ -1,37 +1,39 @@
 body{
  margin:0;
- font-family:-apple-system;
- background:#0f172a;
+ font-family:-apple-system, BlinkMacSystemFont;
+ background:linear-gradient(180deg,#0f172a,#020617);
  color:#fff;
 }
 
 header{
- padding:15px;
- font-size:20px;
+ padding:16px;
+ font-size:22px;
+ font-weight:600;
 }
 
 .glass{
  background:rgba(255,255,255,0.05);
- backdrop-filter:blur(20px);
+ backdrop-filter:blur(25px);
+ border-radius:20px;
  margin:10px;
  padding:15px;
- border-radius:20px;
- box-shadow:0 10px 30px rgba(0,0,0,0.4);
+ box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
-.big{
+.balance{
  text-align:center;
- font-size:24px;
+ font-size:26px;
 }
 
-.form input, .form select{
+.form input,.form select{
  width:100%;
  margin-top:10px;
- padding:12px;
- border-radius:12px;
+ padding:14px;
  border:none;
+ border-radius:14px;
  background:#1e293b;
  color:#fff;
+ font-size:16px;
 }
 
 #list{
@@ -40,15 +42,20 @@ header{
 
 .item{
  background:#1e293b;
- padding:12px;
- border-radius:12px;
+ padding:14px;
+ border-radius:14px;
  margin-bottom:10px;
  display:flex;
  justify-content:space-between;
+ transition:0.2s;
+}
+
+.item:active{
+ transform:scale(0.97);
 }
 
 #map{
- height:250px;
+ height:260px;
  margin:10px;
  border-radius:20px;
 }
@@ -59,14 +66,15 @@ header{
  left:10px;
  right:10px;
  display:flex;
+ gap:10px;
 }
 
 .nav button{
  flex:1;
- margin:5px;
- padding:15px;
+ padding:16px;
  border:none;
- border-radius:16px;
+ border-radius:18px;
  background:#22c55e;
  font-size:18px;
+ box-shadow:0 10px 25px rgba(0,0,0,0.5);
 }
