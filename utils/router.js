@@ -18,7 +18,6 @@ const Router = {
   }
 };
 
-// Инициализация по умолчанию
 document.addEventListener("DOMContentLoaded", () => {
   Router.show("home");
 });
