@@ -7,19 +7,16 @@
 
   <title>TravelCarPro</title>
 
-  <!-- PWA manifest -->
+  <!-- Manifest -->
   <link rel="manifest" href="./manifest.webmanifest" />
 
-  <!-- iOS PWA support -->
+  <!-- iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="TravelCarPro" />
-
-  <!-- Icons -->
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
-  <link rel="icon" type="image/png" href="./icons/icon-192.png" />
 
-  <!-- Splash screens -->
+  <!-- Splash -->
   <link rel="apple-touch-startup-image" href="./splash/splash-640x1136.png" media="(device-width: 320px)" />
   <link rel="apple-touch-startup-image" href="./splash/splash-750x1334.png" media="(device-width: 375px)" />
   <link rel="apple-touch-startup-image" href="./splash/splash-1125x2436.png" media="(device-width: 375px) and (-webkit-device-pixel-ratio: 3)" />
@@ -31,21 +28,17 @@
   <link rel="stylesheet" href="./styles/animations.css" />
   <link rel="stylesheet" href="./styles/dark.css" />
 </head>
+
 <body>
-  <div id="app" class="app-root"></div>
+  <div id="app" class="app-root fade-in"></div>
 
-  <!-- App -->
   <script type="module" src="./src/app.js"></script>
-
-  <!-- SW auto-update -->
   <script src="./sw-update.js"></script>
 
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("./service-worker.js")
-          .catch(console.error);
+        navigator.serviceWorker.register("./service-worker.js");
       });
     }
   </script>
