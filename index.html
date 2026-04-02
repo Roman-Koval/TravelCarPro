@@ -2,51 +2,160 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
 
   <title>TravelCarPro OS</title>
 
-  <!-- PWA Manifest -->
+  <!-- Manifest -->
   <link rel="manifest" href="manifest.json" />
 
-  <!-- Theme color -->
-  <meta name="theme-color" content="#0a84ff" />
-
-  <!-- iOS PWA support -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: white;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      overscroll-behavior: none;
-      height: 100%;
-    }
-    #root {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ui/theme.css" />
+  <link rel="stylesheet" href="ui/fonts.css" />
+  <link rel="stylesheet" href="ui/components.css" />
+  <link rel="stylesheet" href="ui/layout.css" />
+  <link rel="stylesheet" href="ui/animations.css" />
+  <link rel="stylesheet" href="ui/icons.css" />
+  <link rel="stylesheet" href="ui/nav.css" />
+  <link rel="stylesheet" href="ui/pages.css" />
+  <link rel="stylesheet" href="ui/app.css" />
 </head>
 
-<body>
-  <div id="root"></div>
+<body class="dark">
+  <div id="root">
 
-  <!-- Главный JS-файл приложения -->
+    <!-- ------------------------------
+         HOME PAGE
+    ------------------------------- -->
+    <div class="page" data-page="home">
+      <div class="home-header">
+        <h2>TravelCarPro OS</h2>
+        <p class="text-secondary">Ваш интеллектуальный помощник в путешествиях</p>
+      </div>
+
+      <div class="home-actions">
+        <button class="btn" data-nav="ai">
+          <span class="icon icon-small">🤖</span>
+          AI Центр
+        </button>
+
+        <button class="btn" data-nav="player">
+          <span class="icon icon-small">🎵</span>
+          Музыкальный плеер
+        </button>
+
+        <button class="btn" data-nav="settings">
+          <span class="icon icon-small">⚙️</span>
+          Настройки
+        </button>
+      </div>
+    </div>
+
+    <!-- ------------------------------
+         AI PAGE
+    ------------------------------- -->
+    <div class="page" data-page="ai" style="display:none;">
+      <h1 class="page-title">AI Центр</h1>
+
+      <div class="ai-section">
+        <div class="ai-profile-card card">
+          <h3>Ваш профиль</h3>
+          <p id="ai-profile-info">Загрузка...</p>
+        </div>
+
+        <div class="ai-analysis-card card">
+          <h3>Анализ поездки</h3>
+          <p id="ai-trip-info">Выберите поездку для анализа</p>
+        </div>
+
+        <button class="ai-btn" data-action="openHome">На главную</button>
+      </div>
+    </div>
+
+    <!-- ------------------------------
+         PLAYER PAGE
+    ------------------------------- -->
+    <div class="page" data-page="player" style="display:none;">
+      <h1 class="page-title">Музыкальный плеер</h1>
+
+      <img src="icons/icon-192.svg" class="player-cover" id="player-cover" />
+
+      <div class="player-controls">
+        <button data-action="play">▶ / ⏸</button>
+        <button onclick="Player.prev()">⏮</button>
+        <button onclick="Player.next()">⏭</button>
+      </div>
+    </div>
+
+    <!-- ------------------------------
+         SETTINGS PAGE
+    ------------------------------- -->
+    <div class="page" data-page="settings" style="display:none;">
+      <h1 class="page-title">Настройки</h1>
+
+      <ul class="settings-list">
+        <li class="settings-item">
+          <span>Тема</span>
+          <span class="value" id="theme-value">dark</span>
+        </li>
+
+        <li class="settings-item">
+          <span>Язык</span>
+          <span class="value" id="lang-value">ru</span>
+        </li>
+
+        <li class="settings-item">
+          <span>Единицы</span>
+          <span class="value" id="units-value">km / liters</span>
+        </li>
+      </ul>
+
+      <button class="btn" data-action="openHome">На главную</button>
+    </div>
+
+  </div>
+
+  <!-- ------------------------------
+       NAVIGATION BAR
+  ------------------------------- -->
+  <div class="navbar">
+    <div class="nav-item active" data-nav="home">
+      <span class="nav-icon">🏠</span>
+      Главная
+    </div>
+
+    <div class="nav-item" data-nav="ai">
+      <span class="nav-icon">🤖</span>
+      AI
+    </div>
+
+    <div class="nav-item" data-nav="player">
+      <span class="nav-icon">🎵</span>
+      Плеер
+    </div>
+
+    <div class="nav-item" data-nav="settings">
+      <span class="nav-icon">⚙️</span>
+      Настройки
+    </div>
+  </div>
+
+  <!-- ------------------------------
+       SCRIPTS
+  ------------------------------- -->
+  <script src="utils/helpers.js"></script>
+  <script src="utils/storage.js"></script>
+  <script src="utils/router.js"></script>
+  <script src="utils/events.js"></script>
+
+  <script src="player/player.js"></script>
+  <script src="player/player-ui.js"></script>
+
+  <script src="ai/ai-core.js"></script>
+  <script src="ai/ai-ui.js"></script>
+
   <script src="main.js"></script>
-
-  <!-- Регистрация Service Worker -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js")
-        .catch(err => console.error("SW registration failed:", err));
-    }
-  </script>
 </body>
 </html>
