@@ -1,65 +1,34 @@
 // service-worker.js
 
-const CACHE_NAME = "tcp-triplogs-v1";
+const CACHE = "tcp-v1";
 
 const ASSETS = [
-  "/Triplogs/",
-  "/Triplogs/index.html",
-  "/Triplogs/style.css",
-  "/Triplogs/manifest.json",
+  "/TravelCarPro/",
+  "/TravelCarPro/index.html",
+  "/TravelCarPro/style.css",
 
-  "/Triplogs/ui/theme.css",
-  "/Triplogs/ui/fonts.css",
-  "/Triplogs/ui/components.css",
-  "/Triplogs/ui/layout.css",
-  "/Triplogs/ui/animations.css",
-  "/Triplogs/ui/icons.css",
-  "/Triplogs/ui/nav.css",
-  "/Triplogs/ui/pages.css",
-  "/Triplogs/ui/app.css",
+  "/TravelCarPro/ui/nav.css",
+  "/TravelCarPro/ui/app.css",
 
-  "/Triplogs/utils/helpers.js",
-  "/Triplogs/utils/storage.js",
-  "/Triplogs/utils/router.js",
-  "/Triplogs/utils/events.js",
-
-  "/Triplogs/player/player.js",
-  "/Triplogs/player/player-ui.js",
-
-  "/Triplogs/ai/ai-core.js",
-  "/Triplogs/ai/ai-ui.js",
-
-  "/Triplogs/icons/icon-192.png",
-  "/Triplogs/icons/icon-512.png"
+  "/TravelCarPro/utils/router.js",
+  "/TravelCarPro/utils/events.js",
+  "/TravelCarPro/main.js"
 ];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
-  );
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
 });
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      )
+      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
     )
   );
 });
 
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return (
-        cached ||
-        fetch(event.request).catch(() => {
-          return cached;
-        })
-      );
-    })
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    caches.match(e.request).then((cached) => cached || fetch(e.request))
   );
 });
