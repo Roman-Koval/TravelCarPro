@@ -76,12 +76,12 @@
     <div class="page" data-page="player" style="display:none;">
       <h1 class="page-title">Музыкальный плеер</h1>
 
-      <img src="icons/icon-192.svg" class="player-cover" id="player-cover" />
+      <img src="icons/icon-192.png" class="player-cover" id="player-cover" />
 
       <div class="player-controls">
         <button data-action="play">▶ / ⏸</button>
-        <button onclick="Player.prev()">⏮</button>
-        <button onclick="Player.next()">⏭</button>
+        <button onclick="Player && Player.prev && Player.prev()">⏮</button>
+        <button onclick="Player && Player.next && Player.next()">⏭</button>
       </div>
     </div>
 
