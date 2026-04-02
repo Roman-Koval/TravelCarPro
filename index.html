@@ -7,17 +7,16 @@
   <title>TravelCarPro OS</title>
 
   <!-- PWA Manifest -->
-  <link rel="manifest" href="/manifest.json" />
+  <link rel="manifest" href="manifest.json" />
 
-  <!-- Theme color for Android -->
+  <!-- Theme color -->
   <meta name="theme-color" content="#0a84ff" />
 
   <!-- iOS PWA support -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
 
-  <!-- Basic styling reset -->
   <style>
     html, body {
       margin: 0;
@@ -39,16 +38,14 @@
 <body>
   <div id="root"></div>
 
-  <!-- Main JS bundle -->
-  <script type="module" src="/src/main.jsx"></script>
+  <!-- Главный JS-файл приложения -->
+  <script src="main.js"></script>
 
-  <!-- Register Service Worker -->
+  <!-- Регистрация Service Worker -->
   <script>
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js")
-          .catch(err => console.error("SW registration failed:", err));
-      });
+      navigator.serviceWorker.register("service-worker.js")
+        .catch(err => console.error("SW registration failed:", err));
     }
   </script>
 </body>
