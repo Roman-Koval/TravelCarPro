@@ -2,8 +2,10 @@
   "name": "TravelCar",
   "short_name": "TravelCar",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "background_color": "#121212",
   "theme_color": "#FFB74D",
   "icons": [
     {
