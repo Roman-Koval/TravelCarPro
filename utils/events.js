@@ -9,16 +9,25 @@ const Events = {
     document.addEventListener("click", (e) => {
       const target = e.target;
 
-      // --- 1. Обработка кнопок с data-action ---
+      // 1) Кнопки с data-action
       if (target.dataset.action) {
         this.handleAction(target.dataset.action, target);
         return;
       }
 
-      // --- 2. Обработка нижнего меню с data-nav ---
-      const nav = target.closest("[data-nav]");
+      // 2) Нижнее меню с data-nav (клик по иконке, тексту или самому блоку)
+      const nav = target.closest(".nav-item[data-nav]");
       if (nav) {
-        Router.show(nav.dataset.nav);
+        const page = nav.dataset.nav;
+        Router.show(page);
+        return;
+      }
+
+      // 3) Кнопки на главной с data-nav
+      const btnNav = target.closest("button[data-nav]");
+      if (btnNav) {
+        const page = btnNav.dataset.nav;
+        Router.show(page);
         return;
       }
     });
@@ -31,7 +40,9 @@ const Events = {
         break;
 
       case "play":
-        Player.toggle();
+        if (typeof Player !== "undefined" && Player.toggle) {
+          Player.toggle();
+        }
         break;
 
       default:
