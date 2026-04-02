@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "build": "2026-04-02",
+  "modules": {
+    "player": true,
+    "ai": true,
+    "offlineMode": true,
+    "pwa": true,
+    "analytics": false,
+    "cloudSync": false
+  },
+  "features": {
+    "aiProfile": true,
+    "aiTripAnalysis": true,
+    "aiTips": true,
+    "darkMode": true,
+    "adaptiveUI": true,
+    "animations": true
+  },
+  "device": {
+    "type": "mobile",
+    "optimizedFor": ["iOS", "Android", "PWA"]
+  }
+}
