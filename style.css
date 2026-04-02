@@ -1,0 +1,103 @@
+/* ------------------------------
+   TravelCarPro OS — Global Styles
+   ------------------------------ */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ------------------------------
+   Buttons
+   ------------------------------ */
+
+.btn {
+  width: 90%;
+  padding: 14px;
+  margin: 10px auto;
+  display: block;
+  background: #0a84ff;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover {
+  background: #0c7ae6;
+}
+
+.btn-small {
+  padding: 8px 14px;
+  background: #1c1c1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-small:hover {
+  background: #2c2c2e;
+}
+
+/* ------------------------------
+   Cards
+   ------------------------------ */
+
+.card {
+  background: #1c1c1e;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+/* ------------------------------
+   Player Bar
+   ------------------------------ */
+
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #222;
+  font-size: 18px;
+}
+
+.player-bar button {
+  background: #0a84ff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.player-bar button:hover {
+  background: #0c7ae6;
+}
+
+/* ------------------------------
+   Titles
+   ------------------------------ */
+
+h1, h2 {
+  text-align: center;
+  margin-top: 20px;
+}
