@@ -1,0 +1,91 @@
+/* --------------------------------------
+   TravelCarPro OS — Theme System
+   -------------------------------------- */
+
+/* Базовые переменные темы */
+:root {
+  --bg: #000;
+  --bg-secondary: #1c1c1e;
+  --bg-tertiary: #2a2a2c;
+
+  --text: #fff;
+  --text-secondary: #aaa;
+
+  --accent: #0a84ff;
+  --accent-hover: #0c7ae6;
+
+  --card-bg: #1c1c1e;
+  --border: #333;
+
+  --shadow: rgba(0,0,0,0.25);
+}
+
+/* --------------------------------------
+   Тёмная тема (по умолчанию)
+   -------------------------------------- */
+
+body.dark {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* --------------------------------------
+   Светлая тема
+   -------------------------------------- */
+
+body.light {
+  --bg: #f2f2f7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e5e5ea;
+
+  --text: #000;
+  --text-secondary: #555;
+
+  --accent: #007aff;
+  --accent-hover: #006ae0;
+
+  --card-bg: #ffffff;
+  --border: #ccc;
+
+  --shadow: rgba(0,0,0,0.1);
+
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* --------------------------------------
+   Общие элементы, использующие тему
+   -------------------------------------- */
+
+.card {
+  background: var(--card-bg);
+  box-shadow: 0 4px 12px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.btn,
+.ai-btn {
+  background: var(--accent);
+}
+
+.btn:hover,
+.ai-btn:hover {
+  background: var(--accent-hover);
+}
+
+.navbar {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.list-item {
+  background: var(--bg-secondary);
+}
+
+.list-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.section-divider {
+  background: var(--border);
+}
