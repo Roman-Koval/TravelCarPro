@@ -1,51 +1,24 @@
-// --------------------------------------
-// TravelCarPro OS — Mini Router
-// --------------------------------------
+// utils/router.js
 
 const Router = {
-  currentPage: null,
+  current: "home",
 
-  init() {
-    // Находим все страницы
-    this.pages = document.querySelectorAll("[data-page]");
-    this.show("home"); // стартовая страница
-  },
+  show(page) {
+    this.current = page;
 
-  // Показать страницу
-  show(pageName) {
-    this.currentPage = pageName;
-
-    this.pages.forEach(page => {
-      if (page.dataset.page === pageName) {
-        page.style.display = "block";
-        page.classList.add("fade-in");
-      } else {
-        page.style.display = "none";
-        page.classList.remove("fade-in");
-      }
+    // Переключаем страницы
+    document.querySelectorAll("[data-page]").forEach((p) => {
+      p.style.display = p.dataset.page === page ? "block" : "none";
     });
 
-    // Обновляем URL (не обязательно)
-    history.replaceState({}, "", `#${pageName}`);
-  },
-
-  // Навигация по ссылкам
-  bindLinks() {
-    document.querySelectorAll("[data-nav]").forEach(link => {
-      link.onclick = () => {
-        const target = link.dataset.nav;
-        this.show(target);
-        scrollToTop();
-      };
+    // Обновляем нижнее меню
+    document.querySelectorAll(".nav-item").forEach((item) => {
+      item.classList.toggle("active", item.dataset.nav === page);
     });
   }
 };
 
-// Делаем доступным глобально
-window.Router = Router;
-
-// Инициализация после загрузки DOM
+// Инициализация по умолчанию
 document.addEventListener("DOMContentLoaded", () => {
-  Router.init();
-  Router.bindLinks();
+  Router.show("home");
 });
