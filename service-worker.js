@@ -1,50 +1,45 @@
-const CACHE_NAME = "travelcarpro-cache-v1";
+const CACHE = "travelcarpro-v1";
 
 const ASSETS = [
-  "./",
-  "./index.html",
-  "./manifest.webmanifest",
-  "./styles/base.css",
-  "./styles/components.css",
-  "./styles/screens.css",
-  "./styles/animations.css",
-  "./styles/dark.css",
-  "./src/app.js"
+  "index.html",
+  "manifest.json",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "main.js"
 ];
 
+// Установка SW и кэширование базовых файлов
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE).then(cache => cache.addAll(ASSETS))
   );
-  self.skipWaiting();
 });
 
+// Очистка старых кэшей
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        keys.map(key => key !== CACHE && caches.delete(key))
       )
     )
   );
-  self.clients.claim();
 });
 
+// Перехват запросов
 self.addEventListener("fetch", event => {
-  const { request } = event;
-  if (request.method !== "GET") return;
+  const request = event.request;
 
+  // Кэширование музыки
+  if (request.url.includes("/tracks/")) {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Стандартное поведение: cache → network
   event.respondWith(
-    caches.match(request).then(cached => {
-      if (cached) return cached;
-
-      return fetch(request)
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-          return response;
-        })
-        .catch(() => cached);
-    })
+    caches.match(request).then(response => response || fetch(request))
   );
 });
