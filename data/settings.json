@@ -1,0 +1,16 @@
+{
+  "language": "ru",
+  "theme": "dark",
+  "units": {
+    "distance": "km",
+    "fuel": "liters"
+  },
+  "player": {
+    "autoplay": false,
+    "volume": 0.8
+  },
+  "ai": {
+    "riskSensitivity": "normal",
+    "fuelEstimationMode": "standard"
+  }
+}
