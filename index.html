@@ -2,7 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
   <meta name="theme-color" content="#000000" />
 
   <title>TravelCarPro OS</title>
@@ -25,10 +28,7 @@
 
 <body class="dark">
   <div id="root">
-
-    <!-- ------------------------------
-         HOME PAGE
-    ------------------------------- -->
+    <!-- HOME -->
     <div class="page" data-page="home">
       <div class="home-header">
         <h2>TravelCarPro OS</h2>
@@ -53,9 +53,7 @@
       </div>
     </div>
 
-    <!-- ------------------------------
-         AI PAGE
-    ------------------------------- -->
+    <!-- AI -->
     <div class="page" data-page="ai" style="display:none;">
       <h1 class="page-title">AI Центр</h1>
 
@@ -74,9 +72,7 @@
       </div>
     </div>
 
-    <!-- ------------------------------
-         PLAYER PAGE
-    ------------------------------- -->
+    <!-- PLAYER -->
     <div class="page" data-page="player" style="display:none;">
       <h1 class="page-title">Музыкальный плеер</h1>
 
@@ -89,9 +85,7 @@
       </div>
     </div>
 
-    <!-- ------------------------------
-         SETTINGS PAGE
-    ------------------------------- -->
+    <!-- SETTINGS -->
     <div class="page" data-page="settings" style="display:none;">
       <h1 class="page-title">Настройки</h1>
 
@@ -114,12 +108,9 @@
 
       <button class="btn" data-action="openHome">На главную</button>
     </div>
-
   </div>
 
-  <!-- ------------------------------
-       NAVIGATION BAR
-  ------------------------------- -->
+  <!-- NAVBAR -->
   <div class="navbar">
     <div class="nav-item active" data-nav="home">
       <span class="nav-icon">🏠</span>
@@ -142,9 +133,7 @@
     </div>
   </div>
 
-  <!-- ------------------------------
-       SCRIPTS
-  ------------------------------- -->
+  <!-- SCRIPTS -->
   <script src="utils/helpers.js"></script>
   <script src="utils/storage.js"></script>
   <script src="utils/router.js"></script>
