@@ -1,12 +1,12 @@
 {
-  "name": "TravelCar",
+  "name": "TravelCarPro",
   "short_name": "TravelCar",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#121212",
-  "theme_color": "#FFB74D",
+  "background_color": "#0d0d0d",
+  "theme_color": "#ffb74d",
   "icons": [
     {
       "src": "./icons/icon-192.png",
