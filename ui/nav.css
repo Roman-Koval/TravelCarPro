@@ -1,0 +1,72 @@
+/* --------------------------------------
+   TravelCarPro OS — Bottom Navigation Bar
+   -------------------------------------- */
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: #1c1c1e;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Элемент навигации */
+.nav-item {
+  flex: 1;
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  padding-top: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-item:hover {
+  color: #fff;
+}
+
+/* Активный элемент */
+.nav-item.active {
+  color: #0a84ff;
+  font-weight: 600;
+}
+
+/* Иконки */
+.nav-item .nav-icon {
+  display: block;
+  margin: 0 auto 4px auto;
+  width: 26px;
+  height: 26px;
+  opacity: 0.9;
+}
+
+.nav-item.active .nav-icon {
+  opacity: 1;
+}
+
+/* Анимация нажатия */
+.nav-item:active {
+  transform: scale(0.92);
+  transition: transform 0.1s ease;
+}
+
+/* Адаптивность */
+@media (min-width: 700px) {
+  .navbar {
+    height: 80px;
+  }
+  .nav-item {
+    font-size: 14px;
+  }
+  .nav-item .nav-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
