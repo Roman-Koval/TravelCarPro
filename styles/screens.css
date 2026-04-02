@@ -1,7 +1,7 @@
 .screen {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .screen-header {
@@ -11,41 +11,36 @@
 }
 
 .screen-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
 }
 
-.screen-subtitle {
-  font-size: 13px;
-  color: var(--color-text-muted);
-}
-
 .empty-state {
-  margin-top: 32px;
+  margin-top: 40px;
   text-align: center;
   color: var(--color-text-muted);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
 }
 
 .empty-state-icon {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: rgba(255, 183, 77, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 36px;
 }
 
 .empty-state-title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .empty-state-text {
-  font-size: 14px;
+  font-size: 15px;
 }
