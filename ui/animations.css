@@ -1,0 +1,70 @@
+/* --------------------------------------
+   TravelCarPro OS — Animations & Motion
+   -------------------------------------- */
+
+/* Плавное появление контента */
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Плавное появление сверху */
+.slide-down {
+  animation: slideDown 0.35s ease forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Плавное появление снизу */
+.slide-up {
+  animation: slideUp 0.35s ease forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hover-анимации карточек */
+.card {
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: #2a2a2c;
+}
+
+/* Hover-анимации кнопок */
+.btn, .btn-small, .ai-btn {
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.btn:hover,
+.btn-small:hover,
+.ai-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Мини-плеер — плавность */
+.player-bar {
+  transition: background 0.3s ease, padding 0.3s ease;
+}
+
+/* Анимация клика */
+.click-animate:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
+}
+
+/* Плавные переходы для всех элементов */
+* {
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
