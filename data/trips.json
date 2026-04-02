@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Ireland Roadtrip",
+    "country": "Ireland",
+    "distance": 820,
+    "days": 5,
+    "weather": "rain",
+    "roadType": "mixed",
+    "startTime": "08:00",
+    "cities": [
+      { "name": "Dublin", "type": "city" },
+      { "name": "Galway", "type": "city" },
+      { "name": "Cliffs of Moher", "type": "nature" }
+    ],
+    "stats": {
+      "avgSpeed": 85,
+      "stops": 3,
+      "accelerations": 5,
+      "brakings": 4
+    }
+  },
+  {
+    "name": "Turkey Coastal Drive",
+    "country": "Turkey",
+    "distance": 640,
+    "days": 4,
+    "weather": "sun",
+    "roadType": "coast",
+    "startTime": "09:00",
+    "cities": [
+      { "name": "Antalya", "type": "city" },
+      { "name": "Kas", "type": "nature" },
+      { "name": "Fethiye", "type": "city" }
+    ],
+    "stats": {
+      "avgSpeed": 78,
+      "stops": 4,
+      "accelerations": 3,
+      "brakings": 2
+    }
+  }
+]
