@@ -1,32 +1,36 @@
 // service-worker.js
 
-const CACHE_NAME = "tcp-v2";
+const CACHE_NAME = "tcp-triplogs-v1";
+
 const ASSETS = [
-  "/T/",
-  "/T/index.html",
-  "/T/style.css",
-  "/T/manifest.json",
+  "/Triplogs/",
+  "/Triplogs/index.html",
+  "/Triplogs/style.css",
+  "/Triplogs/manifest.json",
 
-  "/T/ui/theme.css",
-  "/T/ui/fonts.css",
-  "/T/ui/components.css",
-  "/T/ui/layout.css",
-  "/T/ui/animations.css",
-  "/T/ui/icons.css",
-  "/T/ui/nav.css",
-  "/T/ui/pages.css",
-  "/T/ui/app.css",
+  "/Triplogs/ui/theme.css",
+  "/Triplogs/ui/fonts.css",
+  "/Triplogs/ui/components.css",
+  "/Triplogs/ui/layout.css",
+  "/Triplogs/ui/animations.css",
+  "/Triplogs/ui/icons.css",
+  "/Triplogs/ui/nav.css",
+  "/Triplogs/ui/pages.css",
+  "/Triplogs/ui/app.css",
 
-  "/T/utils/helpers.js",
-  "/T/utils/storage.js",
-  "/T/utils/router.js",
-  "/T/utils/events.js",
+  "/Triplogs/utils/helpers.js",
+  "/Triplogs/utils/storage.js",
+  "/Triplogs/utils/router.js",
+  "/Triplogs/utils/events.js",
 
-  "/T/player/player.js",
-  "/T/player/player-ui.js",
+  "/Triplogs/player/player.js",
+  "/Triplogs/player/player-ui.js",
 
-  "/T/ai/ai-core.js",
-  "/T/ai/ai-ui.js"
+  "/Triplogs/ai/ai-core.js",
+  "/Triplogs/ai/ai-ui.js",
+
+  "/Triplogs/icons/icon-192.png",
+  "/Triplogs/icons/icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
