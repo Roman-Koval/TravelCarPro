@@ -1,0 +1,120 @@
+/* --------------------------------------
+   TravelCarPro OS — Global App Styles
+   -------------------------------------- */
+
+/* Сброс лишних отступов */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Глобальный фон и текст */
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Контейнер приложения */
+#root {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 80px; /* место под навигацию */
+}
+
+/* Глобальные отступы секций */
+.section {
+  margin-bottom: 24px;
+}
+
+/* Карточки */
+.card {
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Кнопки */
+button,
+.btn,
+.ai-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+button:active,
+.btn:active,
+.ai-btn:active {
+  transform: scale(0.96);
+}
+
+/* Маленькие кнопки */
+.btn-small {
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+/* Списки */
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.list-item:hover {
+  background: var(--bg-tertiary);
+}
+
+/* Текстовые элементы */
+.text-center {
+  text-align: center;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+/* Скругления */
+.rounded {
+  border-radius: 16px;
+}
+
+/* Тени */
+.shadow {
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Адаптивность */
+@media (min-width: 700px) {
+  .card {
+    padding: 22px;
+  }
+
+  button,
+  .btn,
+  .ai-btn {
+    padding: 16px 22px;
+    font-size: 17px;
+  }
+}
