@@ -15,7 +15,7 @@ const Events = {
         return;
       }
 
-      // 2) Нижнее меню с data-nav (клик по иконке, тексту или самому блоку)
+      // 2) Нижнее меню
       const nav = target.closest(".nav-item[data-nav]");
       if (nav) {
         const page = nav.dataset.nav;
