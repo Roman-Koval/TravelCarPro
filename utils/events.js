@@ -9,44 +9,37 @@ const Events = {
     document.addEventListener("click", (e) => {
       const target = e.target;
 
-      // 1) Кнопки с data-action
+      // data-action
       if (target.dataset.action) {
-        this.handleAction(target.dataset.action, target);
+        this.handleAction(target.dataset.action);
         return;
       }
 
-      // 2) Нижнее меню
+      // нижнее меню
       const nav = target.closest(".nav-item[data-nav]");
       if (nav) {
-        const page = nav.dataset.nav;
-        Router.show(page);
+        Router.show(nav.dataset.nav);
         return;
       }
 
-      // 3) Кнопки на главной с data-nav
+      // кнопки на главной
       const btnNav = target.closest("button[data-nav]");
       if (btnNav) {
-        const page = btnNav.dataset.nav;
-        Router.show(page);
+        Router.show(btnNav.dataset.nav);
         return;
       }
     });
   },
 
-  handleAction(action, el) {
+  handleAction(action) {
     switch (action) {
       case "openHome":
         Router.show("home");
         break;
 
       case "play":
-        if (typeof Player !== "undefined" && Player.toggle) {
-          Player.toggle();
-        }
+        if (window.Player && Player.toggle) Player.toggle();
         break;
-
-      default:
-        console.warn("Неизвестное действие:", action);
     }
   }
 };
