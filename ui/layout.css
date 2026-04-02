@@ -1,0 +1,75 @@
+/* --------------------------------------
+   TravelCarPro OS — Layout & Adaptive UI
+   -------------------------------------- */
+
+/* Основной контейнер */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 70px; /* место под мини-плеер */
+}
+
+/* Контентные секции */
+.page {
+  flex: 1;
+  padding: 16px;
+}
+
+/* Центрирование */
+.center {
+  text-align: center;
+}
+
+/* Адаптивные карточки */
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+}
+
+/* Адаптивные кнопки */
+.btn {
+  max-width: 600px;
+}
+
+/* Мини-плеер адаптивность */
+.player-bar {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Сетка для будущих экранов */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Адаптивность под маленькие экраны */
+@media (max-width: 480px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Адаптивность под большие экраны */
+@media (min-width: 700px) {
+  #root {
+    padding-bottom: 90px;
+  }
+
+  .player-bar {
+    padding: 16px 24px;
+  }
+}
