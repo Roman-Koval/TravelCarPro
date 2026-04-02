@@ -9,9 +9,12 @@
 
   <link rel="manifest" href="manifest.json" />
 
+  <!-- Основные стили -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="ui/nav.css" />
+  <link rel="stylesheet" href="styles/dark.css" />
   <link rel="stylesheet" href="ui/app.css" />
+  <link rel="stylesheet" href="ui/nav.css" />
+  <link rel="stylesheet" href="ui/pages.css" />
 </head>
 
 <body class="dark">
@@ -20,43 +23,7 @@
     <!-- HOME -->
     <div class="page" data-page="home">
       <h2>TravelCarPro OS</h2>
-      <button class="btn" data-nav="ai">AI Центр</button>
-      <button class="btn" data-nav="player">Плеер</button>
-      <button class="btn" data-nav="settings">Настройки</button>
-    </div>
 
-    <!-- AI -->
-    <div class="page" data-page="ai" style="display:none;">
-      <h1>AI Центр</h1>
-      <button class="btn" data-action="openHome">На главную</button>
-    </div>
-
-    <!-- PLAYER -->
-    <div class="page" data-page="player" style="display:none;">
-      <h1>Музыкальный плеер</h1>
-      <button data-action="play">▶ / ⏸</button>
-      <button onclick="Player.prev()">⏮</button>
-      <button onclick="Player.next()">⏭</button>
-    </div>
-
-    <!-- SETTINGS -->
-    <div class="page" data-page="settings" style="display:none;">
-      <h1>Настройки</h1>
-      <button class="btn" data-action="openHome">На главную</button>
-    </div>
-
-  </div>
-
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <div class="nav-item active" data-nav="home">🏠 Главная</div>
-    <div class="nav-item" data-nav="ai">🤖 AI</div>
-    <div class="nav-item" data-nav="player">🎵 Плеер</div>
-    <div class="nav-item" data-nav="settings">⚙️ Настройки</div>
-  </div>
-
-  <script src="utils/router.js"></script>
-  <script src="utils/events.js"></script>
-  <script src="main.js"></script>
-</body>
-</html>
+      <div class="home-actions">
+        <button class="btn" data-nav="ai">AI Центр</button>
+        <button class="btn" data-nav="player">Музыкальный плеер
