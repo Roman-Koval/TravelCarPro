@@ -1,0 +1,64 @@
+/* --------------------------------------
+   TravelCarPro OS — Icons & Symbol Styles
+   -------------------------------------- */
+
+/* Базовый стиль иконок */
+.icon {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  margin-right: 8px;
+}
+
+/* Крупные иконки */
+.icon-large {
+  width: 32px;
+  height: 32px;
+}
+
+/* Маленькие иконки */
+.icon-small {
+  width: 16px;
+  height: 16px;
+}
+
+/* Иконки в кнопках */
+.btn .icon,
+.btn-small .icon,
+.ai-btn .icon {
+  margin-right: 10px;
+}
+
+/* Иконки в списках */
+.list-item .icon {
+  margin-right: 12px;
+}
+
+/* Центрирование иконок */
+.icon-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Круглые иконки */
+.icon-round {
+  background: #2a2a2c;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+/* Иконки в навигации */
+.nav-icon {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 4px;
+}
+
+/* Анимация при взаимодействии */
+.icon-click:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
