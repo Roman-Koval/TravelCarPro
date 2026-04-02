@@ -22,7 +22,7 @@ const Events = {
         return;
       }
 
-      // 3) Кнопки на главной
+      // 3) Кнопки на страницах
       const btnNav = target.closest("button[data-nav]");
       if (btnNav) {
         Router.show(btnNav.dataset.nav);
