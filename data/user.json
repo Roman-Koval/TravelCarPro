@@ -1,0 +1,22 @@
+{
+  "name": "Roman",
+  "homeCountry": "Ireland",
+  "preferredLanguages": ["ru", "en"],
+  "travelStyle": "explorer",
+  "preferences": {
+    "nature": true,
+    "cities": true,
+    "nightDriving": false,
+    "highways": true,
+    "mountainRoads": false
+  },
+  "vehicle": {
+    "type": "sedan",
+    "fuelConsumption": 7.5
+  },
+  "ai": {
+    "tone": "friendly",
+    "detailLevel": "high",
+    "riskTolerance": "medium"
+  }
+}
