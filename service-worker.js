@@ -1,45 +1,61 @@
-const CACHE = "travelcarpro-v1";
+// service-worker.js
 
+const CACHE_NAME = "tcp-v2";
 const ASSETS = [
-  "index.html",
-  "manifest.json",
-  "icons/icon-192.png",
-  "icons/icon-512.png",
-  "main.js"
+  "/T/",
+  "/T/index.html",
+  "/T/style.css",
+  "/T/manifest.json",
+
+  "/T/ui/theme.css",
+  "/T/ui/fonts.css",
+  "/T/ui/components.css",
+  "/T/ui/layout.css",
+  "/T/ui/animations.css",
+  "/T/ui/icons.css",
+  "/T/ui/nav.css",
+  "/T/ui/pages.css",
+  "/T/ui/app.css",
+
+  "/T/utils/helpers.js",
+  "/T/utils/storage.js",
+  "/T/utils/router.js",
+  "/T/utils/events.js",
+
+  "/T/player/player.js",
+  "/T/player/player-ui.js",
+
+  "/T/ai/ai-core.js",
+  "/T/ai/ai-ui.js"
 ];
 
-// Установка SW и кэширование базовых файлов
-self.addEventListener("install", event => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
-// Очистка старых кэшей
-self.addEventListener("activate", event => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
+    caches.keys().then((keys) =>
       Promise.all(
-        keys.map(key => key !== CACHE && caches.delete(key))
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
       )
     )
   );
 });
 
-// Перехват запросов
-self.addEventListener("fetch", event => {
-  const request = event.request;
-
-  // Кэширование музыки
-  if (request.url.includes("/tracks/")) {
-    event.respondWith(
-      fetch(request).catch(() => caches.match(request))
-    );
-    return;
-  }
-
-  // Стандартное поведение: cache → network
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(request).then(response => response || fetch(request))
+    caches.match(event.request).then((cached) => {
+      return (
+        cached ||
+        fetch(event.request).catch(() => {
+          return cached;
+        })
+      );
+    })
   );
 });
