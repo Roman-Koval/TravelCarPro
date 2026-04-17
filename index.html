@@ -2,28 +2,19 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#000000" />
-
-  <title>TravelCarPro OS</title>
-
-  <link rel="manifest" href="manifest.json" />
-
-  <!-- Основные стили -->
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="styles/dark.css" />
-  <link rel="stylesheet" href="ui/app.css" />
-  <link rel="stylesheet" href="ui/nav.css" />
-  <link rel="stylesheet" href="ui/pages.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>TravelCarPro — Учёт поездок</title>
+  <meta name="description" content="Приложение для планирования поездок и учёта расходов" />
+  <meta name="theme-color" content="#0a84ff" />
+  <link rel="manifest" href="/TravelCarPro/manifest.json" />
+  <link rel="icon" type="image/png" href="/TravelCarPro/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/TravelCarPro/icons/icon-192.png" />
+  <link rel="stylesheet" href="/TravelCarPro/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 </head>
-
-<body class="dark">
-  <div id="root">
-
-    <!-- HOME -->
-    <div class="page" data-page="home">
-      <h2>TravelCarPro OS</h2>
-
-      <div class="home-actions">
-        <button class="btn" data-nav="ai">AI Центр</button>
-        <button class="btn" data-nav="player">Музыкальный плеер
+<body>
+  <div id="app"></div>
+  <script type="module" src="/TravelCarPro/src/ui/app.js"></script>
+  <script src="/TravelCarPro/main.js"></script>
+</body>
+</html>
