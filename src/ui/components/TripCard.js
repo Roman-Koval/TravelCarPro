@@ -1,65 +1,53 @@
-/* ============================================================
-   TravelCar — TripCard Component
-   Карточка поездки на главном экране
-   ============================================================ */
+import { formatDate, formatCurrency } from '../../core/utils.js';
 
-import { formatDate, sumExpenses } from "../../core/utils.js";
-
-export function TripCard(trip, onClick) {
-  const total = sumExpenses(trip.expenses || []);
-  const budget = trip.budget || 0;
-
-  const progress =
-    budget > 0 ? Math.min(100, (total / budget) * 100) : 0;
-
+export function TripCard(trip) {
+  const total = trip.expenses.reduce((s, e) => s + (e.amountBase || e.amount), 0);
+  
   return `
-    <div class="trip-card card card-clickable fade-in" data-id="${trip.id}">
-      <div class="trip-card-header">
-        <div class="trip-card-title">${trip.title}</div>
-        <div class="trip-card-currency">${trip.currency}</div>
-      </div>
-
-      <div class="trip-card-dates">
-        ${formatDate(trip.startDate)} — ${formatDate(trip.endDate)}
-      </div>
-
-      <div class="trip-card-location">
-        ${trip.city ? trip.city + ", " : ""}${trip.country || ""}
-      </div>
-
-      <div class="trip-card-summary">
-        <div class="trip-card-total">
-          <div class="label">Потрачено</div>
-          <div class="value">${total.toFixed(2)} ${trip.currency}</div>
+    <div class="card" data-trip-id="${trip.id}">
+      <div class="card-header">
+        <div>
+          <div class="card-title">${escapeHtml(trip.title)}</div>
+          <div class="card-subtitle">${escapeHtml(trip.city)}, ${escapeHtml(trip.country)}</div>
         </div>
-
-        ${
-          budget > 0
-            ? `
-          <div class="trip-card-budget">
-            <div class="label">Бюджет</div>
-            <div class="value">${budget.toFixed(2)} ${trip.currency}</div>
-          </div>
-        `
-            : ""
-        }
+        <button class="btn-small trip-actions" data-id="${trip.id}">⋮</button>
       </div>
-
-      <div class="trip-card-progress">
-        <div class="trip-card-progress-fill" style="width:${progress}%"></div>
+      <div style="display:flex;justify-content:space-between;margin:12px 0;font-size:14px">
+        <span>📅 ${formatDate(trip.startDate)} — ${formatDate(trip.endDate)}</span>
+        <span>💰 ${formatCurrency(total, trip.currency)}</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <a href="#trip/${trip.id}" class="btn btn-small" style="flex:1">Детали</a>
+        <button class="btn btn-small btn-danger delete-trip" data-id="${trip.id}">✕</button>
       </div>
     </div>
   `;
 }
 
-/* ============================================================
-   Навешиваем обработчики кликов после рендера
-   ============================================================ */
-export function attachTripCardEvents(container, onClick) {
-  container.querySelectorAll(".trip-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const id = card.getAttribute("data-id");
-      onClick && onClick(id);
+export function attachTripCardEvents(container, onSelect) {
+  container.querySelectorAll('.card[data-trip-id]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('.btn-small')) {
+        const id = card.dataset.tripId;
+        onSelect(id);
+      }
     });
   });
+  
+  container.querySelectorAll('.delete-trip').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (confirm('Удалить эту поездку?')) {
+        import('../../core/state.js').then(({ deleteTrip }) => {
+          deleteTrip(btn.dataset.id);
+        });
+      }
+    });
+  });
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
