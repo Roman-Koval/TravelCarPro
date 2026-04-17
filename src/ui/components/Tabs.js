@@ -1,35 +1,26 @@
-/* ============================================================
-   TravelCar — Tabs Component
-   Вкладки для Trip Details
-   ============================================================ */
-
-export function Tabs(active = "list") {
+export function Tabs(activeTab) {
+  const tabs = [
+    { id: 'list', label: 'Список' },
+    { id: 'charts', label: 'Графики' },
+    { id: 'stats', label: 'Статистика' }
+  ];
+  
   return `
     <div class="tabs">
-      <div class="tab ${active === "list" ? "active" : ""}" data-tab="list">
-        Список
-      </div>
-
-      <div class="tab ${active === "charts" ? "active" : ""}" data-tab="charts">
-        Графики
-      </div>
-
-      <div class="tab ${active === "stats" ? "active" : ""}" data-tab="stats">
-        Статистика
-      </div>
+      ${tabs.map(t => `
+        <button class="tab ${t.id === activeTab ? 'active' : ''}" 
+                data-tab="${t.id}">${t.label}</button>
+      `).join('')}
     </div>
   `;
 }
 
-/* ============================================================
-   Навешиваем события после рендера
-   ============================================================ */
-
-export function attachTabsEvents(container, onChange) {
-  container.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      const name = tab.getAttribute("data-tab");
-      onChange && onChange(name);
+export function attachTabsEvents(container, onTabChange) {
+  container.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      container.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      onTabChange(tab.dataset.tab);
     });
   });
 }
