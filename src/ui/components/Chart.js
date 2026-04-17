@@ -1,123 +1,92 @@
-/* ============================================================
-   TravelCar — Chart Component (Canvas API)
-   Pie Chart + Line Chart
-   ============================================================ */
+import { getExpensesByCategory } from '../../core/state.js';
+import { generateChartColors } from '../../core/utils.js';
 
-/* ------------------------------------------------------------
-   Палитра категорий
-   ------------------------------------------------------------ */
-const COLORS = {
-  "Еда": "#FF7043",
-  "Транспорт": "#42A5F5",
-  "Жильё": "#66BB6A",
-  "Развлечения": "#AB47BC",
-  "Другое": "#BDBDBD"
-};
-
-/* ------------------------------------------------------------
-   Pie Chart — расходы по категориям
-   ------------------------------------------------------------ */
-export function renderPieChart(canvas, expenses) {
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-
-  const total = expenses.reduce((s, e) => s + (e.amountBase ?? e.amount), 0);
-  if (total === 0) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+export function renderPieChart(container, expenses) {
+  if (!container || !Chart) return;
+  
+  const categories = {};
+  expenses.forEach(e => {
+    const cat = e.category || 'Другое';
+    const amount = e.amountBase || e.amount;
+    categories[cat] = (categories[cat] || 0) + amount;
+  });
+  
+  if (Object.keys(categories).length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:var(--text-dim)">Нет данных для графика</p>';
     return;
   }
-
-  let start = 0;
-
-  expenses
-    .reduce((acc, e) => {
-      const key = e.category || "Другое";
-      acc[key] = (acc[key] || 0) + (e.amountBase ?? e.amount);
-      return acc;
-    }, {})
-    .entries = Object.entries;
-
-  const grouped = Object.entries(
-    expenses.reduce((acc, e) => {
-      const key = e.category || "Другое";
-      acc[key] = (acc[key] || 0) + (e.amountBase ?? e.amount);
-      return acc;
-    }, {})
-  );
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  grouped.forEach(([category, value]) => {
-    const angle = (value / total) * Math.PI * 2;
-
-    ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height / 2);
-    ctx.fillStyle = COLORS[category] || "#999";
-    ctx.arc(
-      canvas.width / 2,
-      canvas.height / 2,
-      Math.min(canvas.width, canvas.height) / 2 - 10,
-      start,
-      start + angle
-    );
-    ctx.fill();
-
-    start += angle;
+  
+  const ctx = container.getContext('2d');
+  
+  if (container._chart) container._chart.destroy();
+  
+  container._chart = new Chart(ctx, {
+    type: 'doughnut',
+     {
+      labels: Object.keys(categories),
+      datasets: [{
+         Object.values(categories),
+        backgroundColor: generateChartColors(Object.keys(categories).length),
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text') } }
+      }
+    }
   });
 }
 
-/* ------------------------------------------------------------
-   Line Chart — расходы по дням
-   ------------------------------------------------------------ */
-export function renderLineChart(canvas, expenses) {
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-
-  const byDate = {};
-
-  expenses.forEach(e => {
-    const d = e.date.split("T")[0];
-    byDate[d] = (byDate[d] || 0) + (e.amountBase ?? e.amount);
-  });
-
-  const entries = Object.entries(byDate).sort((a, b) =>
-    a[0] > b[0] ? 1 : -1
-  );
-
-  if (entries.length === 0) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+export function renderLineChart(container, expenses) {
+  if (!container || !Chart) return;
+  
+  if (expenses.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:var(--text-dim)">Нет данных для графика</p>';
     return;
   }
-
-  const values = entries.map(e => e[1]);
-  const max = Math.max(...values);
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  ctx.strokeStyle = "#42A5F5";
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-
-  entries.forEach(([date, value], i) => {
-    const x = (i / (entries.length - 1)) * (canvas.width - 20) + 10;
-    const y =
-      canvas.height - (value / max) * (canvas.height - 20) - 10;
-
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-
-  ctx.stroke();
-
-  // Точки
-  ctx.fillStyle = "#1E88E5";
-  entries.forEach(([date, value], i) => {
-    const x = (i / (entries.length - 1)) * (canvas.width - 20) + 10;
-    const y =
-      canvas.height - (value / max) * (canvas.height - 20) - 10;
-
-    ctx.beginPath();
-    ctx.arc(x, y, 4, 0, Math.PI * 2);
-    ctx.fill();
+  
+  const sorted = [...expenses].sort((a, b) => 
+    new Date(a.date || a.createdAt) - new Date(b.date || b.createdAt)
+  );
+  
+  const ctx = container.getContext('2d');
+  
+  if (container._chart) container._chart.destroy();
+  
+  container._chart = new Chart(ctx, {
+    type: 'line',
+     {
+      labels: sorted.map(e => {
+        const d = new Date(e.date || e.createdAt);
+        return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+      }),
+      datasets: [{
+        label: 'Расходы',
+        data: sorted.map(e => e.amountBase || e.amount),
+        borderColor: 'var(--accent)',
+        backgroundColor: 'rgba(10, 132, 255, 0.1)',
+        fill: true,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { 
+          beginAtZero: true,
+          grid: { color: 'var(--border)' },
+          ticks: { color: 'var(--text-dim)' }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { color: 'var(--text-dim)', maxRotation: 45, minRotation: 45 }
+        }
+      }
+    }
   });
 }
