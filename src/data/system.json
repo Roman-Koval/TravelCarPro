@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "appName": "TravelCarPro",
+  "defaultCurrency": "EUR",
+  "categories": [
+    { "id": "food", "name": "Еда", "icon": "🍽️" },
+    { "id": "transport", "name": "Транспорт", "icon": "🚗" },
+    { "id": "accommodation", "name": "Жильё", "icon": "🏨" },
+    { "id": "entertainment", "name": "Развлечения", "icon": "🎭" },
+    { "id": "shopping", "name": "Покупки", "icon": "🛍️" },
+    { "id": "other", "name": "Другое", "icon": "📦" }
+  ]
+}
