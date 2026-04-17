@@ -1,56 +1,40 @@
-/* ============================================================
-   TravelCar — Modal Component
-   Универсальное модальное окно
-   ============================================================ */
-
-export function Modal({ title = "", content = "", buttons = [] }) {
+export function Modal({ title, children, onClose }) {
   return `
-    <div class="modal-overlay fade-in" id="modal-overlay">
-      <div class="modal-window slide-up">
-        
-        ${title ? `<div class="modal-title">${title}</div>` : ""}
-
-        <div class="modal-content">
-          ${content}
+    <div class="modal-overlay" id="modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>${escapeHtml(title)}</h3>
+          <button class="modal-close" id="modal-close">&times;</button>
         </div>
-
-        <div class="modal-buttons">
-          ${buttons
-            .map(
-              b => `
-            <button class="btn ${b.type || "primary"}" data-action="${b.action}">
-              ${b.label}
-            </button>
-          `
-            )
-            .join("")}
-        </div>
-
+        <div class="modal-body">${children}</div>
       </div>
     </div>
   `;
 }
 
-/* ============================================================
-   Навешиваем события после рендера
-   ============================================================ */
-
-export function attachModalEvents(onAction, onClose) {
-  const overlay = document.getElementById("modal-overlay");
-  if (!overlay) return;
-
-  // Закрытие по клику вне окна
-  overlay.addEventListener("click", e => {
-    if (e.target.id === "modal-overlay") {
-      onClose && onClose();
+export function attachModalEvents(onClose) {
+  const closeBtn = document.getElementById('modal-close');
+  const overlay = document.getElementById('modal');
+  
+  const handleClose = () => {
+    overlay?.remove();
+    onClose?.();
+  };
+  
+  closeBtn?.addEventListener('click', handleClose);
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) handleClose();
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('modal')) {
+      handleClose();
     }
-  });
+  }, { once: true });
+}
 
-  // Кнопки
-  overlay.querySelectorAll("[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const action = btn.getAttribute("data-action");
-      onAction && onAction(action);
-    });
-  });
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
